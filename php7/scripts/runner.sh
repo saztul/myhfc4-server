@@ -3,6 +3,9 @@ if [ -n "$APACHE_UID" ]; then
   usermod --non-unique --uid $APACHE_UID www-data
 fi
 
+# add dns entries for all apache vhosts
+echo "127.0.0.1 $VIRTUAL_HOST" | tr ',' ' ' >> /etc/hosts
+
 # create .sessions directory
 mkdir -p /var/www/.sessions
 chown www-data:www-data -R /var/www/.sessions
